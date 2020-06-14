@@ -6,6 +6,7 @@ import 'package:file_chooser/file_chooser.dart';
 import 'package:flutter/widgets.dart';
 import '../open_image_picker.dart';
 import 'dart:ui' as ui;
+import 'open_image_picker_phone.dart' as phone;
 
 class _ImageFile extends UImageFile {
   String _path;
@@ -78,6 +79,14 @@ Future<List<UImageFile>> openImage({
   double width,
   double height,
 }) async {
+  if (Platform.isAndroid || Platform.isIOS) {
+    return phone.openImage(
+      allowsMultipleSelection: allowsMultipleSelection,
+      width: width,
+      height: height,
+    );
+  }
+
   var file = await showOpenPanel(
     allowsMultipleSelection: allowsMultipleSelection,
     allowedFileTypes: [
