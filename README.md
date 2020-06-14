@@ -2,9 +2,11 @@
 
 Picture file selector
 
-#support
+# support
 [x] Android
+
 [x] Ios
+
 [x] Web
 [x] Mac
 [x] Windows
