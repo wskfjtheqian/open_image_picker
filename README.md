@@ -3,14 +3,12 @@
 Picture file selector
 
 # support
-[x] Android
-
-[x] Ios
-
-[x] Web
-[x] Mac
-[x] Windows
-[x] Linux
+-[x] Android
+-[x] Ios
+-[x] Web
+-[x] Mac
+-[x] Windows
+-[x] Linux
 
 ## Getting Started
 
