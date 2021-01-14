@@ -39,6 +39,8 @@ Future<List<UImageFile>> openImage({
     maxWidth: width,
     maxHeight: height,
   );
-
+  if (null == files) {
+    return [];
+  }
   return [_ImageFile(files, width, height)];
 }
