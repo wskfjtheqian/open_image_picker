@@ -1,30 +1,45 @@
 library open_image;
 
+import 'dart:async';
 import 'dart:core';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
+import 'package:open_file/open_file.dart';
+import 'src/open_image_picker_pc.dart' if (dart.library.html) 'src/open_image_picker_web.dart';
 
-import 'src/open_image_picker_pc.dart' if (dart.library.html) 'src/open_image_picker_web.dart' as picker;
+class UImageFile {
+  OFile _file;
 
+  UImageFile(this._file);
 
-abstract class UImageFile {
-  Future<Uint8List> readAsBytes(BuildContext context);
+  String get path => _file?.path;
 
-  String get path;
+  Future<ui.Image> readImage(BuildContext context, {int maxWidth, int maxHeight}) async {
+    Uint8List memory = (await _file.byteBuffer).asUint8List();
+    final ImageStream stream = MemoryImage(memory).resolve(createLocalImageConfiguration(context));
+    var listener;
+    var completer = Completer<ui.Image>();
+    listener = ImageStreamListener((image, synchronousCall) {
+      completer.complete(zoomImage(image.image, maxWidth.toDouble(), maxHeight.toDouble()));
+      stream.removeListener(listener);
+    }, onError: (exception, stackTrace) {
+      stream.removeListener(listener);
+      completer.completeError(exception);
+    });
+    stream.addListener(listener);
 
-  double get width;
-
-  double get height;
+    return completer.future;
+  }
 }
 
 Future<List<UImageFile>> openImage({
   bool allowsMultipleSelection = true,
-  double width,
-  double height,
-}) {
-  return picker.openImage(
-    allowsMultipleSelection: allowsMultipleSelection,
-    width: width,
-    height: height,
-  );
+  double maxWidth,
+  double maxHeight,
+}) async {
+  var files = await openFile(allowsMultipleSelection: allowsMultipleSelection);
+  return files.map((e) {
+    return UImageFile(e);
+  }).toList();
 }

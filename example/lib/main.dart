@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:open_image_picker/open_image_picker.dart';
 
@@ -32,9 +33,13 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Uint8List> _bytes = [];
 
   void _incrementCounter() {
-    openImage(width: 200, height: 200).then((value) {
+    openImage().then((value) {
       if (value.isNotEmpty) {
-        Future.wait(value.map((e) => e.readAsBytes(context))).then((value) {
+        Future.wait(value.map((e) {
+          return e.readImage(context, maxWidth: 200, maxHeight: 200).then((value) {
+            return value.toByteData(format: ImageByteFormat.png);
+          }).then((value) => value.buffer.asUint8List());
+        })).then((value) {
           setState(() {
             _bytes = value;
           });
@@ -53,8 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: _bytes.length,
         itemBuilder: (context, index) {
           return SizedBox(
-            width: 200,
-            height: 200,
             child: Image.memory(_bytes[index]),
           );
         },
