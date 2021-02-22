@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 import 'package:open_file/open_file.dart';
-import 'src/open_image_picker_pc.dart' if (dart.library.html) 'src/open_image_picker_web.dart';
+import 'src/open_image_picker_pc.dart' ;//if (dart.library.html) 'src/open_image_picker_web.dart';
 
 class UImageFile {
   OFile _file;
