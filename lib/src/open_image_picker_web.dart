@@ -5,8 +5,12 @@ import 'dart:ui' as ui;
 import 'dart:html';
 
 import 'package:flutter/services.dart';
+import 'open_image_picker_pc.dart' as pc;
 
 Future<ui.Image> zoomImage(ui.Image image, double maxWidth, double maxHeight) {
+  if (image.runtimeType.toString() == "CkImage") {
+    return pc.zoomImage(image, maxWidth, maxHeight);
+  }
   if (null == maxWidth && null == maxHeight) {
     return Future.value(image);
   }
