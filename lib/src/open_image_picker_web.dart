@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
 import 'package:flutter/services.dart';
@@ -48,6 +49,7 @@ class HtmlImage implements ui.Image {
   int get height => element.height;
 
   @override
+  // ignore: invalid_override_different_default_values_named
   Future<ByteData> toByteData({ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
     var completer = new Completer<ByteData>();
 
