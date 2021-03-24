@@ -1,6 +1,6 @@
 name: open_image_picker
 description: Open image file picker By (Android,ios,web,mac,linux,window)
-version: 1.0.2
+version: 1.0.3
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
