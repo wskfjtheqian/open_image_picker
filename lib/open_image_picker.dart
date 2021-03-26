@@ -22,7 +22,7 @@ class UImageFile {
     var listener;
     var completer = Completer<ui.Image>();
     listener = ImageStreamListener((image, synchronousCall) {
-      completer.complete(zoomImage(image.image, maxWidth.toDouble(), maxHeight.toDouble()));
+      completer.complete(zoomImage(image.image, maxWidth?.toDouble(), maxHeight?.toDouble()));
       stream.removeListener(listener);
     }, onError: (exception, stackTrace) {
       stream.removeListener(listener);
