@@ -1,6 +1,6 @@
 name: open_image_picker
 description: Open image file picker By (Android,ios,web,mac,linux,window)
-version: 0.0.2
+version: 1.0.3
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,7 +11,9 @@ dependencies:
   file_chooser: ^0.1.6
   image_picker: ^0.6.7+1
   open_file:
-    path: ../open_file
+    git: 
+      url: https://github.com/wskfjtheqian/open_file.git
+      ref: v1.0.2
 
 dev_dependencies:
   flutter_test:
