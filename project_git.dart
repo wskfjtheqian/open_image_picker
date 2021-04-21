@@ -3,7 +3,7 @@ import 'dart:io';
 List<Map<String, String>> configs = [
   {
     'name': 'open_file',
-    'git': 'http://192.168.2.252:8888/yttx/open_file.git ',
+    'git': 'git@192.168.2.252:yttx/open_file.git',
     'branch': 'master',
   },
 ];
